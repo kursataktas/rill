@@ -12,8 +12,6 @@ import TabItem from '@theme/TabItem';
 In Rill Custom Dashboards allows you to build more traditional dashboards that combines data from multiple different metric views and gives you a higher degree of freedom in terms of design and layout.
 
 ## Getting started
-> not sure if/when we will remove the feature flag, but will add this for now.
-
 In order to enable custom dashboarding in your environment, you will need to enable the feature flag.
 
 ```
@@ -115,8 +113,35 @@ kpi:
 
 ```
 
-![img](/img/build/customdashboard/kpi.png)
+<img src = '/img/build/customdashboard/kpi.png' class='rounded-gif' />
+<br />
 </TabItem>
+
+<TabItem value="Rill_Chart" label="Rill Authored Chart " default>
+
+```yaml
+# Chart YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/charts
+
+type: component
+
+data:
+  metrics_sql: |
+    select 
+      measure_0,
+      date_trunc('day', author_date) as date 
+    from dashboard_1
+    where author_date > '2024-07-14 00:00:00 Z'
+
+line_chart:
+  x: date
+  y: measure_0
+```
+
+<img src = '/img/build/customdashboard/rill-chart.png' class='rounded-gif' />
+<br />
+</TabItem>
+
 <TabItem value="Bar" label="Vega Lite -  Bar Charts">
 
 ```yaml

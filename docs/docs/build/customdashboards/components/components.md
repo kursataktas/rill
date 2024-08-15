@@ -12,7 +12,25 @@ import TabItem from '@theme/TabItem';
 In Rill Custom Dashboards allows you to build more traditional dashboards that combines data from multiple different metric views and gives you a higher degree of freedom in terms of design and layout.
 
 ## Rill Authored Visualization Components
+For those who are not familiar with Vega Lite, we have create a few Rill Authored Visualization Components. 
+- KPI,
+- Bar Chart,
+- Line Chart
 
+More coming soon!
+
+You will need to define the `data` component using a `sql` statement (from table) or `metric_sql` statement (from dashboard).
+```yaml
+data:
+    [sql/metric_sql]: |
+```
+
+Once this is done, you can set the graph type with [`bar_chart` or `line_chart`] and set the `x` and `y` axis.
+```yaml
+bar_chart:
+  x: x-axis column
+  y: y-axis column
+```
 ## Rill Authored Interaction Components
 
 ## Building your own component using Vega Lite
@@ -30,7 +48,9 @@ Keep in mind that vega-lite is not well-suited for rendering large number of ele
 
 Now that we have data, we can build out our Vega Lite component.
 
-### Vega Lite stuff
+### Vega Lite 
+
+
 
 ## Examples
 
@@ -51,8 +71,35 @@ kpi:
 
 ```
 
-![img](/img/build/customdashboard/kpi.png)
+<img src = '/img/build/customdashboard/kpi.png' class='rounded-gif' />
+<br />
 </TabItem>
+
+<TabItem value="Rill_Chart" label="Rill Authored Chart " default>
+
+```yaml
+# Chart YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/charts
+
+type: component
+
+data:
+  metrics_sql: |
+    select 
+      measure_0,
+      date_trunc('day', author_date) as date 
+    from dashboard_1
+    where author_date > '2024-07-14 00:00:00 Z'
+
+line_chart:
+  x: date
+  y: measure_0
+```
+
+<img src = '/img/build/customdashboard/rill-chart.png' class='rounded-gif' />
+<br />
+</TabItem>
+
 <TabItem value="Bar" label="Vega_lite -  Bar Charts">
 
 ```yaml
