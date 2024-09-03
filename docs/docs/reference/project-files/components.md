@@ -15,7 +15,7 @@ _**`type`**_ — Refers to the resource type and must be `component` _(required)
 
 _**`data`**_ - A data resolver, either `metrics_sql`, `sql` or `api`. See the examples section for more detailed usage. _(required)_.
 
-Any output renderer:
+One of following output renderers:
 
 _**`kpi`**_ - KPI object
     - `metric_view` - The metrics view to fetch data from _(required)_.
