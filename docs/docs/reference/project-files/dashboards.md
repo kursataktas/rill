@@ -1,6 +1,6 @@
 ---
-title: Dashboard YAML
-sidebar_label: Dashboard YAML
+title: Explore Dashboard YAML
+sidebar_label: Explore Dashboard YAML
 sidebar_position: 30
 hide_table_of_contents: true
 ---

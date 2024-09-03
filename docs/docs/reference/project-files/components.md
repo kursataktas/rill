@@ -1,7 +1,7 @@
 ---
 title: Charts YAML
 sidebar_label: Charts YAML
-sidebar_position: 50
+sidebar_position: 32
 ---
 
 import Tabs from '@theme/Tabs';
