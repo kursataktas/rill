@@ -13,9 +13,14 @@ In Rill Custom Dashboards allows you to build more traditional dashboards that c
 
 ## Rill Authored Visualization Components
 For those who are not familiar with Vega Lite, we have create a few Rill Authored Visualization Components. 
-- KPI,
-- Bar Chart,
+- KPI
+- Bar Chart
+- Stacked Bar Chart
 - Line Chart
+- Table
+- Markdown
+- Image
+- Select
 
 More coming soon!
 
@@ -71,7 +76,7 @@ kpi:
 
 ```
 
-<img src = '/img/build/customdashboard/kpi.png' class='rounded-gif' />
+<img src = '/img/build/canvasdashboards/kpi.png' class='rounded-gif' />
 <br />
 </TabItem>
 
@@ -96,7 +101,7 @@ line_chart:
   y: measure_0
 ```
 
-<img src = '/img/build/customdashboard/rill-chart.png' class='rounded-gif' />
+<img src = '/img/build/canvasdashboards/rill-chart.png' class='rounded-gif' />
 <br />
 </TabItem>
 
@@ -144,7 +149,7 @@ vega_lite: |
   }
 ```
 
-<img src = '/img/build/customdashboard/bar.png' class='rounded-gif' />
+<img src = '/img/build/canvasdashboards/bar.png' class='rounded-gif' />
 <br />
 </TabItem>
 
@@ -203,7 +208,7 @@ vega_lite: |
   }
 ```
 
-<img src = '/img/build/customdashboard/scatter.png' class='rounded-gif' />
+<img src = '/img/build/canvasdashboards/scatter.png' class='rounded-gif' />
 <br />
 </TabItem>
 

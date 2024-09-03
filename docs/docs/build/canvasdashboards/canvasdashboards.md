@@ -15,16 +15,18 @@ In Rill, Canvas Dashboards allows you to build more traditional dashboards that 
 To build Canvas Dashboards in Rill you will be introduced to a few different concepts:
 
 *Components*
+These are individual components that fetches data and renders some type of output such as a visualization.
+
+*Canvas Dashboards*
+These assemble components together in a grid layout for end users to consume. Canvas Dashboards can also contain variables that maps to either a Components input or output.
+
+*Variables, Inputs and Outputs*
+To share values between components components themselves declares inputs that they support and outputs that can they produce a value for. Variables is the clue between these inputs and outputs. A example could be a filter component that produces (outputs) a value that a visualization components uses as input to filter the data query.
 
 ## Getting started
-In order to enable custom dashboarding in your environment, you will need to enable the feature flag.
 
-```
-features:
- - customDashboards
-```
-
-Once enabled, you will see a few more items populate in the `Add` dropdown.
+To create either Canvas Dashboards or Components you click the `Add` menu and select the type of file you want to create.
+Canvas Dashboards and Components are found under the `More` section.
 
 ![img](/img/build/canvasdashboard/add-custom-dashboard.png)
 

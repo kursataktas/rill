@@ -17,15 +17,43 @@ _**`data`**_ - A data resolver, either `metrics_sql`, `sql` or `api`. See the ex
 
 Any output renderer:
 
-_**`kpi`**_ - KPI Object
-    - `metric_view`: the name of the dashboard _(required)_.
-    - `time_range`: the time range, The value must be either a [valid ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) or one of the [Rill ISO 8601 extensions](https://docs.rilldata.com/reference/rill-iso-extensions#extensions) _(required)_.
-    - `measure`: the measure, defined as measure_# _(required)_.
+_**`kpi`**_ - KPI object
+    - `metric_view` - The metrics view to fetch data from _(required)_.
+    - `time_range` - The time range, The value must be either a [valid ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) or one of the [Rill ISO 8601 extensions](https://docs.rilldata.com/reference/rill-iso-extensions#extensions) _(required)_.
+    - `measure` - A named measure from the `metrics_view` _(required)_.
     - `comparison_range`: the comparison time range, same requirements as `time_range`
 
 _**`line_chart`**_ - Line Chart
-    - `x` - the x-axis values based off `metrics_sql` columns
-    - `y` - the y-axis values based off `metrics_sql` columns
+    - `x` - X-axis values based off `metrics_sql` columns _(required)_
+    - `y` - Y-axis values based off `metrics_sql` columns _(required)_
+    - `xLabel` - A string for X-axis label
+    - `yLabel` - A string for Y-axis label
+    - `color` - A string to set the color, any valid html color string.
+
+_**`bar_chart`**_ - Bar Chart
+    - `x` - X-axis values based off `metrics_sql` columns _(required)_
+    - `y` - Y-axis values based off `metrics_sql` columns _(required)_
+    - `xLabel` - A string for X-axis label
+    - `yLabel` - A string for Y-axis label
+    - `color` - A string to set the color, any valid html color string.
+
+_**`stacked_bar_chart`**_ - Stacked Bar Chart
+    - `x` - X-axis values based off `metrics_sql` columns _(required)_
+    - `y` - Y-axis values based off `metrics_sql` columns _(required)_
+    - `xLabel` - A string for X-axis label
+    - `yLabel` - A string for Y-axis label
+    - `color` - A string to set the color, any valid html color string.
+
+_*`markdown`*_ - Text Markdown
+    - `content` - A markdown string that produces text.
+    - `css` - A Object with key-value pairs of css properties.
+
+_*`table`*_ - A Table object
+    - `metric_view` - The metrics view to fetch data from _(required)_.
+    - `col_dimensions` - List of named dimensions _(required)_
+    - `row_dimensions` - List of named dimensions _(required)_
+    - `measures` - List of named measure, will be used as columns _(required)_
+    - `time_range` - The time range, The value must be either a [valid ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) or one of the [Rill ISO 8601 extensions](https://docs.rilldata.com/reference/rill-iso-extensions#extensions) _(required)_.
 
 _**`vega_lite`**_ - For any non-Rill based template charts, you need to define the vega_lite component.
     - `data` -  `{"name": "table"}` setting the data to the SQL query we defined under `data`  _(required)_
