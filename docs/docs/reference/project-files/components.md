@@ -1,98 +1,39 @@
 ---
-title: Create Custom Dashboards
-description: Build custom dashboards, combining multiple metric views and free form visualizations
-sidebar_label: Create Custom Dashboards
-sidebar_position: 00
+title: Charts YAML
+sidebar_label: Charts YAML
+sidebar_position: 50
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+A Component consists of a data resolver (optional) and a output renderer, either Rill provided or a custom visualization defined as a Vega Lite specification.
 
-In Rill Custom Dashboards allows you to build more traditional dashboards that combines data from multiple different metric views and gives you a higher degree of freedom in terms of design and layout.
+## Properties
 
-## Getting started
-In order to enable custom dashboarding in your environment, you will need to enable the feature flag.
+_**`type`**_ — Refers to the resource type and must be `component` _(required)_.
 
-```
-features:
- - customDashboards
-```
+_**`data`**_ - A data resolver, either `metrics_sql`, `sql` or `api`. See the examples section for more detailed usage. _(required)_.
 
-Once enabled, you will see a few more items populate in the `Add` dropdown.
+Any output renderer:
 
-![img](/img/build/customdashboard/add-custom-dashboard.png)
+_**`kpi`**_ - KPI Object
+    - `metric_view`: the name of the dashboard _(required)_.
+    - `time_range`: the time range, The value must be either a [valid ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) or one of the [Rill ISO 8601 extensions](https://docs.rilldata.com/reference/rill-iso-extensions#extensions) _(required)_.
+    - `measure`: the measure, defined as measure_# _(required)_.
+    - `comparison_range`: the comparison time range, same requirements as `time_range`
 
+_**`line_chart`**_ - Line Chart
+    - `x` - the x-axis values based off `metrics_sql` columns
+    - `y` - the y-axis values based off `metrics_sql` columns
 
-## Anatomy of a Custom Dashboard
+_**`vega_lite`**_ - For any non-Rill based template charts, you need to define the vega_lite component.
+    - `data` -  `{"name": "table"}` setting the data to the SQL query we defined under `data`  _(required)_
+    - `mark` - defines the [type of chart](https://vega.github.io/vega-lite/docs/mark.html)  _(required)_
+    - `encoding` - [Encoding the data](https://vega.github.io/vega-lite/docs/encoding.html) with visual properties   _(required)_
+        - `x`, `y`, etc.
+    - For more additional parameters to add, please refer to [Vega Lite's documentation](https://vega.github.io/vega-lite/docs/).
 
-When getting started on a new custom dashboard, you will be introduced to this following page:
-
-![img](/img/build/customdashboard/custom-dashboard.png)
-
-There are three views for a custom dashboard. 
-- Code View
-- Split View
-- Viz View
-
-You can either add charts that you've already made or create components directly within the dashboard. If you want to add a chart you've already created you can select the `+ Add chart` in the UI or start writing YAML to bring in the component into the custom dashboard.
-
-:::note
-The syntax to create your component may vary from an independent chart vs. creating it in a dashboard. We'll go into more details on this topic later on.
-
-<Tabs>
-<TabItem value="file" label="Rill KPI Chart as a file, imported into dashboard" default>
-Chart.yaml:
-```yaml
-type: component
-
-kpi:
-  metric_view: dashboard_1
-  time_range: P1W
-  measure: measure_2
-  comparison_range: P1W
-```
-
-Dashboard.yaml:
-```yaml
-  - component: net_line_kpi
-    height: 2
-    width: 4
-    x: 0
-    y: 1
-```
-</TabItem>
-<TabItem value="dashboard" label="KPI Chart created directly on a dashboard">
-
-```yaml
-  - component:
-      kpi:
-        metric_view: dashboard_1
-        time_range: P1W
-        measure: measure_2
-        comparison_range: P1W
-    width: 3
-    height: 1
-    x: 0
-    y: 0
-```
-</TabItem>
-
-</Tabs>
-:::
-
-
-## Understanding Components
-
-There are a few different types of charts that can be added to a custom dashboard and this determines the required components.
-
-### Rill KPI Templates
-If you are using a Rill template, you can call a **metric-view** directly and use the already defined components in the metric-view. In this case, you will not need to define a Vega Lite component and view specification to build the chart.
-
-### Vega Lite charts
-Using [Vega Lite's chart creating capablities](https://vega.github.io/vega-lite/docs/spec.html), we allow you to customize a chart to whatever your needs are. Within the chart YAML file, you will need to define the `type`, `data` and `vega_lite` component.
-
-We will go into more details in the next page, [Create Components](components/).
 
 ## Examples
 
@@ -113,36 +54,9 @@ kpi:
 
 ```
 
-<img src = '/img/build/customdashboard/kpi.png' class='rounded-gif' />
-<br />
+![img](/img/build/canvasdashboards/kpi.png)
 </TabItem>
-
-<TabItem value="Rill_Chart" label="Rill Authored Chart " default>
-
-```yaml
-# Chart YAML
-# Reference documentation: https://docs.rilldata.com/reference/project-files/charts
-
-type: component
-
-data:
-  metrics_sql: |
-    select 
-      measure_0,
-      date_trunc('day', author_date) as date 
-    from dashboard_1
-    where author_date > '2024-07-14 00:00:00 Z'
-
-line_chart:
-  x: date
-  y: measure_0
-```
-
-<img src = '/img/build/customdashboard/rill-chart.png' class='rounded-gif' />
-<br />
-</TabItem>
-
-<TabItem value="Bar" label="Vega Lite -  Bar Charts">
+<TabItem value="Bar" label="Vega_lite -  Bar Charts">
 
 ```yaml
 # Chart YAML
@@ -190,7 +104,7 @@ vega_lite: |
 <br />
 </TabItem>
 
-<TabItem value="Scatter" label="Vega Lite -  Scatter Charts">
+<TabItem value="Scatter" label="Vega_lite -  Scatter Charts">
 
 ```yaml
 # Chart YAML
@@ -249,7 +163,7 @@ vega_lite: |
 <br />
 </TabItem>
 
-<TabItem value="Line" label="Vega Lite -  Line Charts">
+<TabItem value="Line" label="Vega_lite -  Line Charts">
 
 ```yaml
 # Chart YAML
