@@ -82,7 +82,7 @@ kpi:
 
 ```
 
-![img](/img/build/canvasdashboards/kpi.png)
+![img](/img/build/canvasdashboard/KPI.png)
 </TabItem>
 <TabItem value="Bar" label="Vega_lite -  Bar Charts">
 
@@ -128,7 +128,7 @@ vega_lite: |
   }
 ```
 
-<img src = '/img/build/customdashboard/bar.png' class='rounded-gif' />
+<img src = '/img/build/canvasdashboard/bar.png' class='rounded-gif' />
 <br />
 </TabItem>
 
@@ -187,7 +187,7 @@ vega_lite: |
   }
 ```
 
-<img src = '/img/build/customdashboard/scatter.png' class='rounded-gif' />
+<img src = '/img/build/canvasdashboard/scatter.png' class='rounded-gif' />
 <br />
 </TabItem>
 
@@ -241,7 +241,7 @@ vega_lite: |
     }
   }
 ```
-<img src = '/img/build/customdashboard/line.png' class='rounded-gif' />
+<img src = '/img/build/canvasdashboard/line.png' class='rounded-gif' />
 <br />
 
 </TabItem>

@@ -76,7 +76,7 @@ kpi:
 
 ```
 
-<img src = '/img/build/canvasdashboards/kpi.png' class='rounded-gif' />
+<img src = '/img/build/canvasdashboard/kpi.png' class='rounded-gif' />
 <br />
 </TabItem>
 
@@ -101,7 +101,7 @@ line_chart:
   y: measure_0
 ```
 
-<img src = '/img/build/canvasdashboards/rill-chart.png' class='rounded-gif' />
+<img src = '/img/build/canvasdashboard/rill-chart.png' class='rounded-gif' />
 <br />
 </TabItem>
 
@@ -149,7 +149,7 @@ vega_lite: |
   }
 ```
 
-<img src = '/img/build/canvasdashboards/bar.png' class='rounded-gif' />
+<img src = '/img/build/canvasdashboard/bar.png' class='rounded-gif' />
 <br />
 </TabItem>
 
@@ -208,7 +208,7 @@ vega_lite: |
   }
 ```
 
-<img src = '/img/build/canvasdashboards/scatter.png' class='rounded-gif' />
+<img src = '/img/build/canvasdashboard/scatter.png' class='rounded-gif' />
 <br />
 </TabItem>
 
@@ -262,7 +262,7 @@ vega_lite: |
     }
   }
 ```
-<img src = '/img/build/customdashboard/line.png' class='rounded-gif' />
+<img src = '/img/build/canvasdashboard/line.png' class='rounded-gif' />
 <br />
 
 </TabItem>
