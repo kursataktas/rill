@@ -64,6 +64,77 @@ _**`vega_lite`**_ - For any non-Rill based template charts, you need to define t
 
 
 ## Examples
+### Rill Authored Charts
+<Tabs>
+<TabItem value="Bar" label="Bar Chart " default>
+
+```yaml
+# Chart YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/charts
+
+type: component
+
+data:
+  metrics_sql: |
+    select 
+      measure_0,
+      date_trunc('day', author_date) as date 
+    from dashboard_1
+    where author_date > '2024-07-14 00:00:00 Z'
+
+line_chart:
+  x: date
+  y: measure_0
+```
+</TabItem>
+
+<TabItem value="Stacked Bar" label="Stacked Bar Chart " default>
+
+```yaml
+
+```
+
+</TabItem>
+
+<TabItem value="Line" label="Line Chart " default>
+
+```yaml
+# Chart YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/charts
+
+type: component
+
+data:
+  metrics_sql: |
+    select 
+      measure_0,
+      date_trunc('day', author_date) as date 
+    from dashboard_1
+    where author_date > '2024-07-14 00:00:00 Z'
+
+line_chart:
+  x: date
+  y: measure_0
+```
+</TabItem>
+
+<TabItem value="Area" label="Area Chart " default>
+
+```yaml
+
+```
+</TabItem>
+
+<TabItem value="Scatter" label="Scatter Chart " default>
+
+```yaml
+
+```
+</TabItem>
+
+</Tabs>
+
+### Rill Authored Others
 
 <Tabs>
 <TabItem value="KPI" label="KPI Chart " default>
@@ -81,9 +152,107 @@ kpi:
   comparison_range: P1W
 
 ```
-
 ![img](/img/build/canvasdashboard/KPI.png)
 </TabItem>
+<TabItem value="Table" label="Table" default>
+
+```yaml
+# Chart YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/charts
+    
+type: component
+
+table:
+  measures:
+    - net_line_changes
+  metric_view: "dashboard_1"
+  time_range: "P3M"
+  #comparison_range: "P3M"
+
+  row_dimensions:
+    - author_name
+  col_dimensions:
+    - filename
+```
+</TabItem>
+
+<TabItem value="Pivot Table" label="Pivot Table" default>
+
+```yaml
+
+```
+</TabItem>
+
+<TabItem value="Markdown" label="Markdown" default>
+
+```yaml
+
+```
+</TabItem>
+
+<TabItem value="Image" label="Image" default>
+
+```yaml
+
+```
+</TabItem>
+
+<TabItem value="Select" label="Select" default>
+
+```yaml
+# Chart YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/charts
+    
+type: component
+
+select:
+  valueField: "1"
+  label: "label"
+  labelField: "labelField"
+  placeholder: "Test"
+```
+</TabItem>
+
+<TabItem value="Switch" label="Switch" default>
+
+```yaml
+# Chart YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/charts
+    
+type: component
+
+switch:
+  label: 'A switch'
+  value: "1"
+```
+</TabItem>
+
+</Tabs>
+
+### Rill Authored Map Based
+
+<Tabs>
+<TabItem value="Layer Map" label="Layer Map" default>
+
+```yaml
+
+```
+</TabItem>
+
+<TabItem value="Choropleth" label="Choropleth Charts" default>
+
+```yaml
+
+```
+</TabItem>
+
+
+</Tabs>
+
+
+### Vega-Lite Charts
+<Tabs>
+
 <TabItem value="Bar" label="Vega_lite -  Bar Charts">
 
 ```yaml
@@ -247,3 +416,4 @@ vega_lite: |
 </TabItem>
 
 </Tabs>
+

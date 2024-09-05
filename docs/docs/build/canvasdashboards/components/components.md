@@ -13,16 +13,38 @@ In Rill Custom Dashboards allows you to build more traditional dashboards that c
 
 ## Rill Authored Visualization Components
 For those who are not familiar with Vega Lite, we have create a few Rill Authored Visualization Components. 
-- KPI
-- Bar Chart
-- Stacked Bar Chart
-- Line Chart
-- Table
-- Markdown
-- Image
-- Select
 
-More coming soon!
+
+<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+
+  <div style={{ flex: '1', padding: '10px' }}>
+    <!-- Column 1 content goes here -->
+    ### Charts
+      - Bar Chart
+      - Stacked Bar Chart
+      - Line Chart
+      - Area Charts
+      - Scatter Plot
+      - Layer Map
+      - Choropleth Charts
+
+  </div>
+
+  <div style={{ flex: '1', padding: '10px' }}>
+    <!-- Column 2 content goes here -->
+    ### Others
+      - KPI
+      - Table
+      - Pivot Table
+      - Markdown
+      - Image
+      - Select
+      - Switch
+  </div>
+
+</div>
+
+
 
 You will need to define the `data` component using a `sql` statement (from table) or `metric_sql` statement (from dashboard).
 ```yaml
@@ -59,6 +81,7 @@ Now that we have data, we can build out our Vega Lite component.
 
 ## Examples
 
+Check out our [references](../../../reference/project-files/components.md#examples) for more examples!
 <Tabs>
 <TabItem value="KPI" label="KPI Chart " default>
 
