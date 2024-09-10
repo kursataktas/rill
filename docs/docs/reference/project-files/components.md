@@ -1,6 +1,6 @@
 ---
-title: Charts YAML
-sidebar_label: Charts YAML
+title: Component YAML
+sidebar_label: Component YAML
 sidebar_position: 32
 ---
 
