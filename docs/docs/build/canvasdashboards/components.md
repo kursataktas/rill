@@ -1,6 +1,6 @@
 ---
 title: Components
-description: Components make up your custom dashboards
+description: Components make up your Canvas dashboards
 sidebar_label: Create Components
 sidebar_position: 00
 ---
@@ -9,10 +9,10 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 
-In Rill Custom Dashboards allows you to build more traditional dashboards that combines data from multiple different metric views and gives you a higher degree of freedom in terms of design and layout.
+In Rill Canvas Dashboards allows you to build more traditional dashboards that combines data from multiple different metric views and gives you a higher degree of freedom in terms of design and layout.
 
-## Rill Authored Visualization Components
-For those who are not familiar with Vega Lite, we have create a few Rill Authored Visualization Components. 
+## Rill Authored Components
+For those who are not familiar with Vega Lite, we have create a few Rill Authored Components. 
 
 
 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -23,19 +23,13 @@ For those who are not familiar with Vega Lite, we have create a few Rill Authore
       - Bar Chart
       - Stacked Bar Chart
       - Line Chart
-      - Area Charts
-      - Scatter Plot
-      - Layer Map
-      - Choropleth Charts
-
+      - KPI
+      - Table
   </div>
 
   <div style={{ flex: '1', padding: '10px' }}>
     <!-- Column 2 content goes here -->
     ### Others
-      - KPI
-      - Table
-      - Pivot Table
       - Markdown
       - Image
       - Select
@@ -43,7 +37,6 @@ For those who are not familiar with Vega Lite, we have create a few Rill Authore
   </div>
 
 </div>
-
 
 
 You will need to define the `data` component using a `sql` statement (from table) or `metric_sql` statement (from dashboard).
@@ -81,20 +74,17 @@ Now that we have data, we can build out our Vega Lite component.
 
 ## Examples
 
-Check out our [references](../../../reference/project-files/components.md#examples) for more examples!
+Check out our [references](../../reference/project-files/components.md#examples) for more examples!
 <Tabs>
 <TabItem value="KPI" label="KPI Chart " default>
 
 ```yaml
-# Chart YAML
-# Reference documentation: https://docs.rilldata.com/reference/project-files/charts
-    
 type: component
 
 kpi:
-  metric_view: dashboard_1 #name of dashboard
+  metric_view: dashboard_1
   time_range: P1W
-  measure: measure_2  #retrieved from the dashboard top down [0:]
+  measure: measure_2
   comparison_range: P1W
 
 ```
@@ -106,9 +96,6 @@ kpi:
 <TabItem value="Rill_Chart" label="Rill Authored Chart " default>
 
 ```yaml
-# Chart YAML
-# Reference documentation: https://docs.rilldata.com/reference/project-files/charts
-
 type: component
 
 data:
@@ -130,10 +117,7 @@ line_chart:
 
 <TabItem value="Bar" label="Vega_lite -  Bar Charts">
 
-```yaml
-# Chart YAML
-# Reference documentation: https://docs.rilldata.com/reference/project-files/charts
-    
+```yaml 
 type: component
 
 data:
@@ -178,10 +162,7 @@ vega_lite: |
 
 <TabItem value="Scatter" label="Vega_lite -  Scatter Charts">
 
-```yaml
-# Chart YAML
-# Reference documentation: https://docs.rilldata.com/reference/project-files/charts
-    
+```yaml    
 type: component
 
 data:
@@ -238,9 +219,6 @@ vega_lite: |
 <TabItem value="Line" label="Vega_lite -  Line Charts">
 
 ```yaml
-# Chart YAML
-# Reference documentation: https://docs.rilldata.com/reference/project-files/charts
-    
 type: component
 
 data:
