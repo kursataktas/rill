@@ -18,7 +18,7 @@ _**`data`**_ - A data resolver, either `metrics_sql`, `sql` or `api`. See the ex
 One of following output renderers:
 
 _**`kpi`**_ - KPI object
-    - `metric_view` - The metrics view to fetch data from _(required)_.
+    - `metrics_view` - The metrics view to fetch data from _(required)_.
     - `time_range` - The time range, The value must be either a [valid ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) or one of the [Rill ISO 8601 extensions](https://docs.rilldata.com/reference/rill-iso-extensions#extensions) _(required)_.
     - `measure` - A named measure from the `metrics_view` _(required)_.
     - `comparison_range`: the comparison time range, same requirements as `time_range`
@@ -37,23 +37,20 @@ _**`bar_chart`**_ - Bar Chart
     - `yLabel` - A string for Y-axis label
     - `color` - A string to set the color, any valid html color string.
 
-_**`stacked_bar_chart`**_ - Stacked Bar Chart
-    - `x` - X-axis values based off `metrics_sql` columns _(required)_
-    - `y` - Y-axis values based off `metrics_sql` columns _(required)_
-    - `xLabel` - A string for X-axis label
-    - `yLabel` - A string for Y-axis label
-    - `color` - A string to set the color, any valid html color string.
-
 _*`markdown`*_ - Text Markdown
     - `content` - A markdown string that produces text.
     - `css` - A Object with key-value pairs of css properties.
 
 _*`table`*_ - A Table object
-    - `metric_view` - The metrics view to fetch data from _(required)_.
+    - `metrics_view` - The metrics view to fetch data from _(required)_.
     - `col_dimensions` - List of named dimensions _(required)_
     - `row_dimensions` - List of named dimensions _(required)_
     - `measures` - List of named measure, will be used as columns _(required)_
     - `time_range` - The time range, The value must be either a [valid ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) or one of the [Rill ISO 8601 extensions](https://docs.rilldata.com/reference/rill-iso-extensions#extensions) _(required)_.
+
+_*`image`*_ - A Image object
+    - `url` - The URL, either internal or external, to an image _(required)_
+    - `css` - A Object with key-value pairs of css properties.
 
 _**`vega_lite`**_ - For any non-Rill based template charts, you need to define the vega_lite component.
     - `data` -  `{"name": "table"}` setting the data to the SQL query we defined under `data`  _(required)_
@@ -123,7 +120,7 @@ line_chart:
 type: component
 
 kpi:
-  metric_view: dashboard_1 #name of dashboard
+  metrics_view: dashboard_1 #name of dashboard
   time_range: P1W
   measure: measure_2  #retrieved from the dashboard top down [0:]
   comparison_range: P1W
@@ -139,7 +136,7 @@ type: component
 table:
   measures:
     - net_line_changes
-  metric_view: "dashboard_1"
+  metrics_view: "dashboard_1"
   time_range: "P3M"
   #comparison_range: "P3M"
 
@@ -196,9 +193,6 @@ switch:
 <TabItem value="Bar" label="Vega_lite -  Bar Charts">
 
 ```yaml
-# Chart YAML
-# Reference documentation: https://docs.rilldata.com/reference/project-files/charts
-    
 type: component
 
 data:
@@ -244,9 +238,6 @@ vega_lite: |
 <TabItem value="Scatter" label="Vega_lite -  Scatter Charts">
 
 ```yaml
-# Chart YAML
-# Reference documentation: https://docs.rilldata.com/reference/project-files/charts
-    
 type: component
 
 data:
@@ -303,9 +294,6 @@ vega_lite: |
 <TabItem value="Line" label="Vega_lite -  Line Charts">
 
 ```yaml
-# Chart YAML
-# Reference documentation: https://docs.rilldata.com/reference/project-files/charts
-    
 type: component
 
 data:
