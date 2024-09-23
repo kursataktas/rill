@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 
-In Rill Canvas Dashboasrds allows you to build more traditional dashboards that combines data from multiple different metric views and gives you a higher degree of freedom in terms of design and layout.
+In Rill, Canvas Dashboards allows you to build more traditional dashboards that combines data from multiple different metric views and gives you a higher degree of freedom in terms of design and layout. Components is the key building block of Canvas Dashboards and this section will walk you through how to master components and explore that available capabilities.
 
 ## Anatomy of a Component
 Every component consists of four main sections:
