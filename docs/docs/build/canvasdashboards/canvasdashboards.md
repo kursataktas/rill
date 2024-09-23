@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 
-In Rill, Canvas Dashboards allows you to build more traditional dashboards that combines data from multiple different metric views and gives you a higher degree of freedom in terms of design and layout.
+In Rill, Canvas Dashboards allows you to build more traditional dashboards that combines data from multiple different metric views and gives you a higher degree of freedom in terms of design and layout. Canvas Dashboards share all the same features you love from Explore Dashboards such as security policies, embeddability and performance.
 
 ## Basic Concepts
 To build Canvas Dashboards in Rill you will be introduced to a few different concepts:
@@ -21,7 +21,7 @@ These are individual components that fetches data and renders some type of outpu
 These assemble components together in a grid layout for end users to consume. Canvas Dashboards can also contain variables that maps to a Component input or output.
 
 **Variables, Inputs and Outputs**  
-To share values between components components themselves declares inputs that they support and outputs that can they produce a value for. Variables is the clue between these inputs and outputs. A example could be a filter component that produces (outputs) a value that a visualization components uses as input to filter the data query.
+To share values between components components themselves declares inputs that they support and outputs that can they produce a value for. Variables is the glue between these inputs and outputs. A example could be a filter component that produces (outputs) a value that a visualization components uses as input to filter the data query.
 
 ## Getting started
 
@@ -93,10 +93,10 @@ type: dashboard
 
 ## Understanding Components
 
-There are a few different types of charts that can be added to a Canvas dashboard and this determines the required components.
+There are a few different types of components that can be added to a Canvas dashboard.
 
 ### Rill KPI Templates
-If you are using a Rill template, you can call a **metric-view** directly and use the already defined components in the metric-view. In this case, you will not need to define a Vega Lite component and view specification to build the chart.
+Rill comes with a set of components built in to help you quickly assemple a Canvas Dashboard. This includes a set of data visualizations as well as other commonly used component types such as images, text, dropdown menus and switches.
 
 ### Vega Lite charts
 Using [Vega Lite's chart creating capablities](https://vega.github.io/vega-lite/docs/spec.html), we allow you to customize a chart to whatever your needs are. Within the chart YAML file, you will need to define the `type`, `data` and `vega_lite` component.
