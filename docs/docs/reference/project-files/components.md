@@ -82,13 +82,30 @@ line_chart:
 ```
 </TabItem>
 
-<TabItem value="Stacked Bar" label="Stacked Bar Chart " default>
+<TabItem value="Stacked Bar" label="Stacked Bar Chart">
 
 ```yaml
+# Chart YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/charts
 
-```
+type: component
 
-</TabItem>
+data:
+  metrics_sql: |
+    select 
+      author_name,
+      measure_2,
+      date_trunc('day', author_date) as date,     
+    from dashboard_1
+    where author_date > '2024-07-14'
+
+stacked_bar_chart:
+  x: date
+  y: measure_2
+  color: author_name
+
+  ```
+  </TabItem>
 
 <TabItem value="Line" label="Line Chart " default>
 
@@ -108,6 +125,52 @@ line_chart:
   y: measure_0
 ```
 </TabItem>
+
+      <TabItem value="Area" label="Area Charts">
+
+  ```yaml
+# Chart YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/charts
+
+type: component
+
+
+    ```
+  </TabItem>
+
+
+<TabItem value="Scatter" label="Scatter Plots">
+
+  ```yaml
+# Chart YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/charts
+
+type: component
+
+
+    ```
+  </TabItem>
+    <TabItem value="Pie" label="Pie Charts">
+
+ ```yaml
+# Chart YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/charts
+
+type: component
+
+data:
+  metrics_sql: |
+    select 
+      added_lines,
+      deleted_lines,
+      date
+    from dashboard_1
+    where author_date = '2024-07-14'
+
+pie_chart:
+
+  ```
+  </TabItem>
 
 </Tabs>
 
@@ -164,13 +227,23 @@ table:
 <TabItem value="Select" label="Select" default>
 
 ```yaml
+# Component YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/components
+    
 type: component
 
+#define the selector component as an output. can be used as input in other components
+output:
+  name: author
+  type: string
+
+data:
+# can use api: or metrics_sql:
+  sql: SELECT DISTINCT <dimension> FROM model limit 10000 
+
 select:
-  valueField: "1"
-  label: "label"
-  labelField: "labelField"
-  placeholder: "Test"
+  valueField: "value_field"
+  placeholder: "Placeholder"
 ```
 </TabItem>
 
@@ -188,6 +261,8 @@ switch:
 </Tabs>
 
 ### Vega-Lite Charts
+
+For a full list of possibile charts to create via Vega-lite, please visit their example gallery, [here](https://vega.github.io/vega-lite/examples/).
 <Tabs>
 
 <TabItem value="Bar" label="Vega_lite -  Bar Charts">
