@@ -20,8 +20,6 @@
   const cloudClientIDsArr = cloudClientIDs.split(",");
   const disableForgotPassDomainsArr = disableForgotPassDomains.split(",");
 
-  // By default show the LogIn page
-  $: isLoginPage = true;
   $: errorText = "";
   $: isRillCloud = false;
 
@@ -36,9 +34,10 @@
       decodeURIComponent(escape(window.atob(configParams))),
     );
 
-    if (config?.extraParams?.screen_hint === "signup") {
-      isLoginPage = false;
-    }
+    // TO BE REMOVED
+    // if (config?.extraParams?.screen_hint === "signup") {
+    //   isLoginPage = false;
+    // }
 
     if (cloudClientIDsArr.includes(config?.clientID)) {
       isRillCloud = true;
@@ -94,42 +93,42 @@
     isEmailDisabled = true;
     errorText = "";
     try {
-      if (isLoginPage) {
-        webAuth.login(
-          {
-            realm: databaseConnection,
-            username: email,
-            password: password,
-          },
-          (err) => {
-            if (err) displayError({ message: err?.description });
-            isEmailDisabled = false;
-          },
-        );
-      } else {
-        webAuth.redirect.signupAndLogin(
-          {
-            connection: databaseConnection,
-            email: email,
-            password: password,
-          },
-          // explicitly typing as any to avoid missing property TS/svelte-check error
-          (err: any) => {
-            // Auth0 is not consistent in the naming of the error description field
-            const errorText =
-              typeof err?.description === "string"
-                ? err.description
-                : typeof err?.policy === "string"
-                  ? err.policy
-                  : typeof err?.error_description === "string"
-                    ? err.error_description
-                    : err?.message;
+      webAuth.login(
+        {
+          realm: databaseConnection,
+          username: email,
+          password: password,
+        },
+        (err) => {
+          if (err) displayError({ message: err?.description });
+          isEmailDisabled = false;
+        },
+      );
 
-            if (err) displayError({ message: errorText });
-            isEmailDisabled = false;
-          },
-        );
-      }
+      // TO BE REMOVED
+      // TODO: should we check for `last_used_connection`
+      // webAuth.redirect.signupAndLogin(
+      //   {
+      //     connection: databaseConnection,
+      //     email: email,
+      //     password: password,
+      //   },
+      //   // explicitly typing as any to avoid missing property TS/svelte-check error
+      //   (err: any) => {
+      //     // Auth0 is not consistent in the naming of the error description field
+      //     const errorText =
+      //       typeof err?.description === "string"
+      //         ? err.description
+      //         : typeof err?.policy === "string"
+      //           ? err.policy
+      //           : typeof err?.error_description === "string"
+      //             ? err.error_description
+      //             : err?.message;
+
+      //     if (err) displayError({ message: errorText });
+      //     isEmailDisabled = false;
+      //   },
+      // );
     } catch (err) {
       displayError({ message: err?.description || err?.message });
       isEmailDisabled = false;
@@ -170,9 +169,7 @@
 <RillTheme>
   <AuthContainer>
     <RillLogoSquareNegative size="84px" />
-    <div class="text-xl my-6">
-      {isLoginPage ? "Log in to Rill" : "Create your Rill account"}
-    </div>
+    <div class="text-xl my-6">Log in or sign up</div>
     <div class="flex flex-col gap-y-4" style:width="400px">
       {#each LOGIN_OPTIONS as { label, icon, style, connection } (connection)}
         <CtaButton
@@ -196,7 +193,6 @@
       />
 
       <EmailPassForm
-        {isLoginPage}
         disabled={isEmailDisabled}
         on:submit={(e) => {
           handleEmailSubmit(e.detail.email, e.detail.password);
@@ -214,16 +210,5 @@
     {/if}
 
     <Disclaimer />
-
-    {#if isRillCloud}
-      <div class="mt-6 text-sm text-slate-500">
-        {isLoginPage ? "Don't" : "Already"} have an account?
-
-        <!-- svelte-ignore a11y-invalid-attribute -->
-        <a href="#" on:click={() => (isLoginPage = !isLoginPage)}>
-          {isLoginPage ? "Sign up" : "Log in"}</a
-        >
-      </div>
-    {/if}
   </AuthContainer>
 </RillTheme>
