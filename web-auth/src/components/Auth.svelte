@@ -9,13 +9,12 @@
   import EmailPassForm from "./EmailPassForm.svelte";
   import { getConnectionFromEmail } from "./utils";
   import OrSeparator from "./OrSeparator.svelte";
+  import { AuthManager } from "./auth-manager";
 
   export let configParams: string;
   export let cloudClientIDs = "";
   export let disableForgotPassDomains = "";
   export let connectionMap = "{}";
-
-  const LOCAL_STORAGE_KEY = "last_used_connection";
 
   const connectionMapObj = JSON.parse(connectionMap);
   const cloudClientIDsArr = cloudClientIDs.split(",");
@@ -26,35 +25,11 @@
 
   let isSSODisabled = false;
   let isEmailDisabled = false;
-  let lastUsedConnection: string | null = null;
 
-  // TODO: add indicator for last used connection
+  const authManager = new AuthManager();
 
   let webAuth: WebAuth;
   const databaseConnection = "Username-Password-Authentication";
-
-  function getLastUsedConnection() {
-    return localStorage.getItem(LOCAL_STORAGE_KEY);
-  }
-
-  function setLastUsedConnection(connection: string | null) {
-    if (connection) {
-      localStorage.setItem(LOCAL_STORAGE_KEY, connection);
-    } else {
-      localStorage.removeItem(LOCAL_STORAGE_KEY);
-    }
-    lastUsedConnection = connection;
-  }
-
-  $: {
-    const storedConnection = getLastUsedConnection();
-    if (storedConnection) {
-      lastUsedConnection = storedConnection;
-      // console.log(`Last used connection: ${lastUsedConnection}`);
-    } else {
-      setLastUsedConnection(null);
-    }
-  }
 
   function initConfig() {
     const config = JSON.parse(
@@ -92,7 +67,7 @@
   }
 
   function authorize(connection: string) {
-    setLastUsedConnection(connection);
+    authManager.setLastUsedConnection(connection);
     webAuth.authorize({ connection });
   }
 
@@ -116,7 +91,7 @@
       prompt: "login",
     });
 
-    setLastUsedConnection(connectionName);
+    authManager.setLastUsedConnection(connectionName);
   }
 
   function handleEmailSubmit(email: string, password: string) {
@@ -135,7 +110,7 @@
         },
       );
 
-      setLastUsedConnection(databaseConnection);
+      authManager.setLastUsedConnection(databaseConnection);
 
       // TO BE REMOVED
       // TODO: should we check for `last_used_connection`
