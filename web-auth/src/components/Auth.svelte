@@ -8,11 +8,14 @@
   import AuthContainer from "./AuthContainer.svelte";
   import EmailPassForm from "./EmailPassForm.svelte";
   import { getConnectionFromEmail } from "./utils";
+  import OrSeparator from "./OrSeparator.svelte";
 
   export let configParams: string;
   export let cloudClientIDs = "";
   export let disableForgotPassDomains = "";
   export let connectionMap = "{}";
+
+  const LOCAL_STORAGE_KEY = "last_used_connection";
 
   const connectionMapObj = JSON.parse(connectionMap);
   const cloudClientIDsArr = cloudClientIDs.split(",");
@@ -23,9 +26,35 @@
 
   let isSSODisabled = false;
   let isEmailDisabled = false;
+  let lastUsedConnection: string | null = null;
+
+  // TODO: add indicator for last used connection
 
   let webAuth: WebAuth;
   const databaseConnection = "Username-Password-Authentication";
+
+  function getLastUsedConnection() {
+    return localStorage.getItem(LOCAL_STORAGE_KEY);
+  }
+
+  function setLastUsedConnection(connection: string | null) {
+    if (connection) {
+      localStorage.setItem(LOCAL_STORAGE_KEY, connection);
+    } else {
+      localStorage.removeItem(LOCAL_STORAGE_KEY);
+    }
+    lastUsedConnection = connection;
+  }
+
+  $: {
+    const storedConnection = getLastUsedConnection();
+    if (storedConnection) {
+      lastUsedConnection = storedConnection;
+      // console.log(`Last used connection: ${lastUsedConnection}`);
+    } else {
+      setLastUsedConnection(null);
+    }
+  }
 
   function initConfig() {
     const config = JSON.parse(
@@ -63,6 +92,7 @@
   }
 
   function authorize(connection: string) {
+    setLastUsedConnection(connection);
     webAuth.authorize({ connection });
   }
 
@@ -85,6 +115,8 @@
       login_hint: email,
       prompt: "login",
     });
+
+    setLastUsedConnection(connectionName);
   }
 
   function handleEmailSubmit(email: string, password: string) {
@@ -102,6 +134,8 @@
           isEmailDisabled = false;
         },
       );
+
+      setLastUsedConnection(databaseConnection);
 
       // TO BE REMOVED
       // TODO: should we check for `last_used_connection`
@@ -183,13 +217,8 @@
         </CtaButton>
       {/each}
 
-      <div class="flex items-center justify-center h-6">
-        <hr class="flex-grow border-t border-slate-300" />
-        <span class="px-2 text-slate-500 text-sm">or</span>
-        <hr class="flex-grow border-t border-slate-300" />
-      </div>
+      <OrSeparator />
 
-      <!-- TODO: re-enable SSO -->
       <!-- <SSOForm
         disabled={isSSODisabled}
         on:ssoSubmit={(e) => {
